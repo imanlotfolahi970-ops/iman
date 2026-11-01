@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AI-powered electrical engineering and smart home solutions. Smart grid automation, IoT integration, AI code assistants, and high-performance APIs." />
+  <title>iman</title>
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Tailwind Config: custom theme tokens (colors, fonts) -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            electric: {
+              400: '#22d3ee',
+              500: '#06b6d4',
+              600: '#0891b2',
+            },
+            neon: {
+              400: '#4ade80',
+              500: '#22c55e',
+              600: '#16a34a',
+            },
+            surface: {
+              800: '#0b1220',
+              900: '#070c16',
+              950: '#040810',
+            },
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          boxShadow: {
+            glow: '0 0 40px rgba(34, 211, 238, 0.35)',
+            'glow-green': '0 0 40px rgba(34, 197, 94, 0.35)',
+          },
+          animation: {
+            float: 'float 6s ease-in-out infinite',
+            'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'fade-up': 'fadeUp 0.7s ease-out both',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-14px)' },
+            },
+            fadeUp: {
+              from: { opacity: '0', transform: 'translateY(24px)' },
+              to: { opacity: '1', transform: 'translateY(0)' },
+            },
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Lucide Icons (lightweight SVG icon set) -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+  <!-- Custom stylesheet -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body class="bg-surface-950 text-slate-200 font-sans antialiased selection:bg-electric-500/30 selection:text-electric-400">
+
+  <!-- ============================================================
+       HEADER / NAVIGATION — glassmorphism sticky bar
+  ============================================================ -->
+  <header id="navbar" class="fixed top-0 inset-x-0 z-50 transition-all duration-300">
+    <nav class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="nav-shell mt-4 flex items-center justify-between rounded-2xl px-4 py-3 md:px-6">
+        <!-- Logo -->
+        <a href="#hero" class="flex items-center gap-2.5 group">
+          <span class="relative grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br from-electric-500 to-neon-500 shadow-glow">
+            <i data-lucide="zap" class="h-5 w-5 text-surface-950"></i>
+          </span>
+          <span class="text-lg font-extrabold tracking-tight text-white">
+            Volt<span class="text-electric-400">Mind</span><span class="text-neon-400">AI</span>
+          </span>
+        </a>
+
+        <!-- Desktop nav links -->
+        <ul class="hidden items-center gap-1 md:flex">
+          <li><a class="nav-link" href="#features">Features</a></li>
+          <li><a class="nav-link" href="#calculator">Savings</a></li>
+          <li><a class="nav-link" href="#pricing">Pricing</a></li>
+          <li><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+
+        <div class="flex items-center gap-3">
+          <a href="#pricing" class="btn-primary hidden sm:inline-flex">
+            Get Started
+            <i data-lucide="arrow-right" class="h-4 w-4"></i>
+          </a>
+
+          <!-- Mobile menu toggle -->
+          <button
+            id="menu-toggle"
+            aria-label="Open menu"
+            aria-expanded="false"
+            class="grid h-10 w-10 place-items-center rounded-xl border border-white/10 bg-white/5 text-white md:hidden"
+          >
+            <i data-lucide="menu" class="h-5 w-5"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile dropdown menu -->
+      <div id="mobile-menu" class="nav-shell mt-2 hidden flex-col gap-1 p-3 md:hidden">
+        <a class="mobile-nav-link" href="#features">Features</a>
+        <a class="mobile-nav-link" href="#calculator">Savings Calculator</a>
+        <a class="mobile-nav-link" href="#pricing">Pricing</a>
+        <a class="mobile-nav-link" href="#contact">Contact</a>
+        <a href="#pricing" class="btn-primary mt-2 justify-center">Get Started</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ============================================================
+         HERO SECTION — headline, subtitle, dual CTA, animated glow
+    ============================================================ -->
+    <section id="hero" class="relative overflow-hidden pt-36 pb-24 sm:pt-44 sm:pb-32">
+      <!-- Ambient background decorations -->
+      <div class="pointer-events-none absolute inset-0 -z-10">
+        <div class="hero-grid"></div>
+        <div class="glow-orb glow-orb--cyan"></div>
+        <div class="glow-orb glow-orb--green"></div>
+        <div class="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-surface-950 to-transparent"></div>
+      </div>
+
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="grid items-center gap-14 lg:grid-cols-2">
+          <!-- Copy column -->
+          <div class="text-center lg:text-left animate-fade-up">
+            <span class="inline-flex items-center gap-2 rounded-full border border-electric-400/30 bg-electric-400/10 px-4 py-1.5 text-sm font-medium text-electric-400">
+              <span class="relative flex h-2 w-2">
+                <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-neon-400 opacity-75"></span>
+                <span class="relative inline-flex h-2 w-2 rounded-full bg-neon-400"></span>
+              </span>
+              Next-gen smart grid platform
+            </span>
+
+            <h1 class="mt-6 text-4xl font-extrabold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
+              Powering the Future with
+              <span class="bg-gradient-to-r from-electric-400 via-cyan-300 to-neon-400 bg-clip-text text-transparent">
+                AI-Driven Electrical
+              </span>
+              Engineering
+            </h1>
+
+            <p class="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-slate-400 lg:mx-0">
+              We fuse machine learning with power systems expertise to automate smart grids,
+              optimize energy flow, and generate production-ready
+              <span class="font-mono text-electric-400">Python</span> &amp;
+              <span class="font-mono text-neon-400">Kotlin</span> code —
+              from IoT firmware to high-performance grid APIs.
+            </p>
+
+            <div class="mt-9 flex flex-col items-center gap-4 sm:flex-row sm:justify-center lg:justify-start">
+              <a href="#features" class="btn-primary w-full justify-center sm:w-auto">
+                Explore Platform
+                <i data-lucide="rocket" class="h-4 w-4"></i>
+              </a>
+              <a href="#contact" class="btn-ghost w-full justify-center sm:w-auto">
+                <i data-lucide="phone-call" class="h-4 w-4"></i>
+                Contact Us
+              </a>
+            </div>
+
+            <!-- Trust stats -->
+            <dl class="mt-12 grid grid-cols-3 gap-6 border-t border-white/10 pt-8">
+              <div>
+                <dt class="text-sm text-slate-500">Grid Uptime</dt>
+                <dd class="text-2xl font-bold text-white">99.99%</dd>
+              </div>
+              <div>
+                <dt class="text-sm text-slate-500">Devices Managed</dt>
+                <dd class="text-2xl font-bold text-white">2.4M+</dd>
+              </div>
+              <div>
+                <dt class="text-sm text-slate-500">Avg. Savings</dt>
+                <dd class="text-2xl font-bold text-neon-400">37%</dd>
+              </div>
+            </dl>
+          </div>
+
+          <!-- Visual column: floating glass "AI code" card -->
+          <div class="relative hidden animate-float lg:block">
+            <div class="glass-card rounded-3xl p-6 shadow-glow">
+              <div class="flex items-center gap-2 border-b border-white/10 pb-4">
+                <span class="h-3 w-3 rounded-full bg-red-400/80"></span>
+                <span class="h-3 w-3 rounded-full bg-yellow-400/80"></span>
+                <span class="h-3 w-3 rounded-full bg-green-400/80"></span>
+                <span class="ml-3 font-mono text-xs text-slate-400">grid_optimizer.py</span>
+              </div>
+              <pre class="mt-4 overflow-x-auto font-mono text-sm leading-relaxed"><code><span class="text-purple-400">from</span> <span class="text-white">voltmind</span> <span class="text-purple-400">import</span> <span class="text-electric-400">SmartGrid</span>, <span class="text-electric-400">AIDispatcher</span>
+
+<span class="text-slate-500"># AI-balanced load distribution</span>
+grid = <span class="text-electric-400">SmartGrid</span>(region=<span class="text-neon-400">"EU-WEST"</span>)
+dispatcher = <span class="text-electric-400">AIDispatcher</span>(model=<span class="text-neon-400">"volt-v3"</span>)
+
+<span class="text-purple-400">while</span> grid.online:
+    load = grid.<span class="text-yellow-300">forecast</span>(horizon=<span class="text-orange-300">24</span>)
+    plan = dispatcher.<span class="text-yellow-300">optimize</span>(load)
+    grid.<span class="text-yellow-300">dispatch</span>(plan)
+    <span class="text-yellow-300">print</span>(<span class="text-neon-400">f"Δ Efficiency: {plan.gain:.1%}"</span>)</code></pre>
+              <div class="mt-5 flex items-center justify-between rounded-xl bg-surface-900/60 px-4 py-3">
+                <span class="text-sm text-slate-400">Live efficiency gain</span>
+                <span id="hero-live-gain" class="font-mono text-lg font-bold text-neon-400">+18.4%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         FEATURES SECTION — 4 glowing cards
+    ============================================================ -->
+    <section id="features" class="relative py-24 sm:py-28">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-2xl text-center">
+          <p class="text-sm font-semibold uppercase tracking-[0.2em] text-electric-400">Capabilities</p>
+          <h2 class="mt-3 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+            One platform. <span class="text-gradient-cyan-green">Every layer</span> of the smart energy stack.
+          </h2>
+          <p class="mt-4 text-lg text-slate-400">
+            From substation automation to the code that powers it — engineered for reliability, built for scale.
+          </p>
+        </div>
+
+        <div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <!-- Feature card 1: Smart Grid Automation -->
+          <article class="feature-card group">
+            <div class="feature-icon feature-icon--cyan">
+              <i data-lucide="network" class="h-6 w-6"></i>
+            </div>
+            <h3 class="mt-5 text-lg font-bold text-white">Smart Grid Automation</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-400">
+              Self-healing distribution networks with predictive load balancing and AI fault isolation in under 200&nbsp;ms.
+            </p>
+            <span class="mt-4 inline-flex items-center gap-1 text-sm font-medium text-electric-400 opacity-0 transition-opacity group-hover:opacity-100">
+              Learn more <i data-lucide="arrow-up-right" class="h-4 w-4"></i>
+            </span>
+          </article>
+
+          <!-- Feature card 2: IoT Integration -->
+          <article class="feature-card group">
+            <div class="feature-icon feature-icon--green">
+              <i data-lucide="cpu" class="h-6 w-6"></i>
+            </div>
+            <h3 class="mt-5 text-lg font-bold text-white">IoT Integration</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-400">
+              Plug-and-play connectors for MQTT, Zigbee, Modbus &amp; Matter — onboard thousands of sensors in minutes, not months.
+            </p>
+            <span class="mt-4 inline-flex items-center gap-1 text-sm font-medium text-neon-400 opacity-0 transition-opacity group-hover:opacity-100">
+              Learn more <i data-lucide="arrow-up-right" class="h-4 w-4"></i>
+            </span>
+          </article>
+
+          <!-- Feature card 3: AI Code Assistants -->
+          <article class="feature-card group">
+            <div class="feature-icon feature-icon--purple">
+              <i data-lucide="code-2" class="h-6 w-6"></i>
+            </div>
+            <h3 class="mt-5 text-lg font-bold text-white">Python &amp; Kotlin Assistants</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-400">
+              Generate firmware, control loops, and data pipelines with domain-trained models that speak IEC&nbsp;61850 and Kotlin coroutines.
+            </p>
+            <span class="mt-4 inline-flex items-center gap-1 text-sm font-medium text-purple-400 opacity-0 transition-opacity group-hover:opacity-100">
+              Learn more <i data-lucide="arrow-up-right" class="h-4 w-4"></i>
+            </span>
+          </article>
+
+          <!-- Feature card 4: High-Performance APIs -->
+          <article class="feature-card group">
+            <div class="feature-icon feature-icon--amber">
+              <i data-lucide="gauge" class="h-6 w-6"></i>
+            </div>
+            <h3 class="mt-5 text-lg font-bold text-white">High-Performance APIs</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-400">
+              Sub-10ms GraphQL &amp; gRPC endpoints with edge caching across 40+ regions — built for real-time telemetry at petabyte scale.
+            </p>
+            <span class="mt-4 inline-flex items-center gap-1 text-sm font-medium text-amber-400 opacity-0 transition-opacity group-hover:opacity-100">
+              Learn more <i data-lucide="arrow-up-right" class="h-4 w-4"></i>
+            </span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         INTERACTIVE CALCULATOR + PRICING SECTION
+    ============================================================ -->
+    <section id="calculator" class="relative py-24 sm:py-28">
+      <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-electric-500/40 to-transparent"></div>
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-2xl text-center">
+          <p class="text-sm font-semibold uppercase tracking-[0.2em] text-neon-400">Estimate &amp; Pricing</p>
+          <h2 class="mt-3 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+            See what AI optimization could <span class="text-gradient-cyan-green">save you</span>
+          </h2>
+          <p class="mt-4 text-lg text-slate-400">
+            Adjust the sliders to model your facility, then compare plans.
+          </p>
+        </div>
+
+        <div class="mt-14 grid gap-8 lg:grid-cols-5">
+          <!-- ---------- Calculator widget ---------- -->
+          <div class="glass-card rounded-3xl p-6 sm:p-8 lg:col-span-2">
+            <div class="flex items-center gap-3">
+              <span class="grid h-11 w-11 place-items-center rounded-xl bg-electric-500/15 text-electric-400">
+                <i data-lucide="calculator" class="h-5 w-5"></i>
+              </span>
+              <div>
+                <h3 class="text-lg font-bold text-white">Savings Calculator</h3>
+                <p class="text-sm text-slate-400">Instant estimate</p>
+              </div>
+            </div>
+
+            <div class="mt-7 space-y-6">
+              <!-- Monthly bill slider -->
+              <div>
+                <div class="mb-2 flex items-center justify-between text-sm">
+                  <label for="monthly-bill" class="font-medium text-slate-300">Monthly Energy Bill</label>
+                  <output id="bill-output" for="monthly-bill" class="font-mono font-semibold text-electric-400">$2,400</output>
+                </div>
+                <input id="monthly-bill" class="range-slider" type="range" min="200" max="50000" step="100" value="2400" />
+              </div>
+
+              <!-- Devices slider -->
+              <div>
+                <div class="mb-2 flex items-center justify-between text-sm">
+                  <label for="device-count" class="font-medium text-slate-300">Connected IoT Devices</label>
+                  <output id="device-output" for="device-count" class="font-mono font-semibold text-electric-400">150</output>
+                </div>
+                <input id="device-count" class="range-slider" type="range" min="10" max="5000" step="10" value="150" />
+              </div>
+
+              <!-- Facility type -->
+              <div>
+                <label for="facility-type" class="mb-2 block text-sm font-medium text-slate-300">Facility Type</label>
+                <select id="facility-type" class="form-select">
+                  <option value="0.22">Residential / Smart Home</option>
+                  <option value="0.31" selected>Commercial Building</option>
+                  <option value="0.38">Industrial Plant</option>
+                  <option value="0.42">Data Center</option>
+                </select>
+              </div>
+
+              <!-- Feature toggles -->
+              <fieldset class="space-y-3">
+                <legend class="mb-2 text-sm font-medium text-slate-300">Optimization Modules</legend>
+                <label class="toggle-row">
+                  <input type="checkbox" class="calc-addon" data-boost="0.05" checked />
+                  <span>AI Load Forecasting <span class="text-slate-500">(+5%)</span></span>
+                </label>
+                <label class="toggle-row">
+                  <input type="checkbox" class="calc-addon" data-boost="0.04" checked />
+                  <span>Peak Shaving Automation <span class="text-slate-500">(+4%)</span></span>
+                </label>
+                <label class="toggle-row">
+                  <input type="checkbox" class="calc-addon" data-boost="0.03" />
+                  <span>Predictive Maintenance <span class="text-slate-500">(+3%)</span></span>
+                </label>
+              </fieldset>
+
+              <!-- Results -->
+              <div class="rounded-2xl border border-white/10 bg-surface-900/60 p-5">
+                <div class="flex items-baseline justify-between">
+                  <span class="text-sm text-slate-400">Est. annual savings</span>
+                  <span id="annual-savings" class="font-mono text-3xl font-extrabold text-neon-400">$8,956</span>
+                </div>
+                <div class="mt-3 flex items-baseline justify-between text-sm">
+                  <span class="text-slate-400">Savings rate</span>
+                  <span id="savings-rate" class="font-mono font-semibold text-electric-400">31.1%</span>
+                </div>
+                <div class="mt-3 flex items-baseline justify-between text-sm">
+                  <span class="text-slate-400">Est. payback period</span>
+                  <span id="payback-period" class="font-mono font-semibold text-white">5.8 months</span>
+                </div>
+                <div class="mt-4 h-2 overflow-hidden rounded-full bg-white/5">
+                  <div id="savings-bar" class="h-full rounded-full bg-gradient-to-r from-electric-500 to-neon-500 transition-all duration-500" style="width: 31%"></div>
+                </div>
+              </div>
+              <p class="text-xs leading-relaxed text-slate-500">
+                * Estimates based on aggregated customer telemetry. Actual results vary by tariff, climate, and usage patterns.
+              </p>
+            </div>
+          </div>
+
+          <!-- ---------- Pricing tiers ---------- -->
+          <div id="pricing" class="grid gap-6 sm:grid-cols-3 lg:col-span-3 lg:grid-cols-3">
+            <!-- Starter -->
+            <article class="pricing-card">
+              <header class="flex items-baseline justify-between">
+                <h3 class="text-lg font-bold text-white">Starter</h3>
+                <span class="rounded-full bg-white/5 px-2.5 py-0.5 text-xs font-medium text-slate-400">Homes</span>
+              </header>
+              <p class="mt-1 text-sm text-slate-400">Smart home energy intelligence</p>
+              <p class="mt-5">
+                <span class="text-4xl font-extrabold text-white">$49</span>
+                <span class="text-sm text-slate-500">/mo</span>
+              </p>
+              <ul class="mt-6 space-y-3 text-sm text-slate-300">
+                <li class="flex items-start gap-2"><i data-lucide="check" class="mt-0.5 h-4 w-4 shrink-0 text-neon-400"></i>Up to 50 IoT devices</li>
+                <li class="flex items-start gap-2"><i data-lucide="check" class="mt-0.5 h-4 w-4 shrink-0 text-neon-400"></i>Basic load forecasting</li>
+                <li class="flex items-start gap-2"><i data-lucide="check" class="mt-0.5 h-4 w-4 shrink-0 text-neon-400"></i>Community support</li>
+                <li class="flex items-start gap-2"><i data-lucide="check" class="mt-0.5 h-4 w-4 shrink-0 text-neon-400"></i>Monthly energy reports</li>
+              </ul>
+              <a href="#contact" class="btn-ghost mt-8 w-full justify-center">Choose Starter</a>
+            </article>
+
+            <!-- Pro (highlighted) -->
+            <article class="pricing-card pricing-card--featured">
+              <div class="absolute -top-3 left-1/2 -translate-x-1/2">
+                <span class="rounded-full bg-gradient-to-r from-electric-500 to-neon-500 px-4 py-1 text-xs font-bold uppercase tracking-wide text-surface-950 shadow-glow">
+                  Most Popular
+                </span>
+              </div>
+              <header class="flex items-baseline justify-between pt-2">
+                <h3 class="text-lg font-bold text-white">Pro</h3>
+                <span class="rounded-full bg-electric-400/15 px-2.5 py-0.5 text-xs font-medium text-electric-400">Business</span>
+              </header>
+              <p class="mt-1 text-sm text-slate-400">Full smart-grid automation suite</p>
+              <p class="mt-5">
+                <span class="text-4xl font-extrabold text-white">$299</span>
+                <span class="text-sm text-slate-500">/mo</span>
+              </p>
+              <ul class="mt-6 space-y-3 text-sm text-slate-300">
+                <li class="flex items-start gap-2"><i data-lucide="check" class="mt-0.5 h-4 w-4 shrink-0 text-neon-400"></i>Up to 2,000 IoT devices</li>
+                <li class="flex items-start gap-2"><i data-lucide="check" class="mt-0.5 h-4 w-4 shrink-0 text-neon-400"></i>AI code assistants (Py/Kotlin)</li>
+                <li class="flex items-start gap-2"><i data-lucide="check" class="mt-0.5 h-4 w-4 shrink-0 text-neon-400"></i>Real-time API access</li>
+                <li class="flex items-start gap-2"><i data-lucide="check" class="mt-0.5 h-4 w-4 shrink-0 text-neon-400"></i>Peak-shaving automation</li>
+                <li class="flex items-start gap-2"><i data-lucide="check" class="mt-0.5 h-4 w-4 shrink-0 text-neon-400"></i>Priority support (24/5)</li>
+              </ul>
+              <a href="#contact" class="btn-primary mt-8 w-full justify-center">Start Free Trial</a>
+            </article>
+
+            <!-- Enterprise -->
+            <article class="pricing-card">
+              <header class="flex items-baseline justify-between">
+                <h3 class="text-lg font-bold text-white">Enterprise</h3>
+                <span class="rounded-full bg-white/5 px-2.5 py-0.5 text-xs font-medium text-slate-400">Utilities</span>
+              </header>
+              <p class="mt-1 text-sm text-slate-400">Grid-scale, mission-critical</p>
+              <p class="mt-5">
+                <span class="text-4xl font-extrabold text-white">Custom</span>
+              </p>
+              <ul class="mt-6 space-y-3 text-sm text-slate-300">
+                <li class="flex items-start gap-2"><i data-lucide="check" class="mt-0.5 h-4 w-4 shrink-0 text-neon-400"></i>Unlimited devices &amp; sites</li>
+                <li class="flex items-start gap-2"><i data-lucide="check" class="mt-0.5 h-4 w-4 shrink-0 text-neon-400"></i>Private model deployment</li>
+                <li class="flex items-start gap-2"><i data-lucide="check" class="mt-0.5 h-4 w-4 shrink-0 text-neon-400"></i>On-prem / air-gapped option</li>
+                <li class="flex items-start gap-2"><i data-lucide="check" class="mt-0.5 h-4 w-4 shrink-0 text-neon-400"></i>Dedicated solutions engineer</li>
+                <li class="flex items-start gap-2"><i data-lucide="check" class="mt-0.5 h-4 w-4 shrink-0 text-neon-400"></i>99.99% SLA &amp; SOC2</li>
+              </ul>
+              <a href="#contact" class="btn-ghost mt-8 w-full justify-center">Talk to Sales</a>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         CONTACT / CTA SECTION
+    ============================================================ -->
+    <section id="contact" class="relative py-24 sm:py-28">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="glass-card relative overflow-hidden rounded-3xl p-8 sm:p-12">
+          <div class="glow-orb glow-orb--cyan !opacity-20"></div>
+          <div class="relative grid gap-10 lg:grid-cols-2 lg:items-center">
+            <div>
+              <h2 class="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+                Ready to electrify your operations?
+              </h2>
+              <p class="mt-4 text-lg text-slate-400">
+                Tell us about your project — our engineers respond within one business day with a tailored rollout plan.
+              </p>
+              <ul class="mt-8 space-y-3 text-sm text-slate-300">
+                <li class="flex items-center gap-2"><i data-lucide="mail" class="h-4 w-4 text-electric-400"></i> hello@voltmind.ai</li>
+                <li class="flex items-center gap-2"><i data-lucide="map-pin" class="h-4 w-4 text-electric-400"></i> Berlin · Austin · Singapore</li>
+                <li class="flex items-center gap-2"><i data-lucide="clock" class="h-4 w-4 text-electric-400"></i> Support: 24/7 for Pro &amp; Enterprise</li>
+              </ul>
+            </div>
+
+            <form id="contact-form" class="space-y-4" novalidate>
+              <div class="grid gap-4 sm:grid-cols-2">
+                <div>
+                  <label for="name" class="form-label">Full name</label>
+                  <input id="name" name="name" type="text" required class="form-input" placeholder="Ada Lovelace" />
+                </div>
+                <div>
+                  <label for="email" class="form-label">Work email</label>
+                  <input id="email" name="email" type="email" required class="form-input" placeholder="ada@company.com" />
+                </div>
+              </div>
+              <div>
+                <label for="message" class="form-label">Project details</label>
+                <textarea id="message" name="message" rows="4" required class="form-input resize-none" placeholder="We manage a 12-building campus and want to…"></textarea>
+              </div>
+              <button type="submit" class="btn-primary w-full justify-center">
+                Send Message
+                <i data-lucide="send" class="h-4 w-4"></i>
+              </button>
+              <p id="form-status" role="status" class="hidden rounded-xl border border-neon-500/30 bg-neon-500/10 px-4 py-3 text-sm text-neon-400"></p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="border-t border-white/10 bg-surface-900/50">
+    <div class="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+      <div class="grid gap-10 md:grid-cols-4">
+        <!-- Brand -->
+        <div class="md:col-span-2">
+          <a href="#hero" class="flex items-center gap-2.5">
+            <span class="grid h-9 w-9 place-items-center rounded-lg bg-gradient-to-br from-electric-500 to-neon-500">
+              <i data-lucide="zap" class="h-4 w-4 text-surface-950"></i>
+            </span>
+            <span class="text-base font-extrabold text-white">Volt<span class="text-electric-400">Mind</span><span class="text-neon-400">AI</span></span>
+          </a>
+          <p class="mt-4 max-w-sm text-sm leading-relaxed text-slate-400">
+            AI-powered electrical engineering for smarter grids, greener buildings, and faster software.
+          </p>
+          <!-- Social links -->
+          <div class="mt-6 flex gap-3">
+            <a href="#" aria-label="X / Twitter" class="social-btn"><i data-lucide="twitter" class="h-4 w-4"></i></a>
+            <a href="#" aria-label="GitHub" class="social-btn"><i data-lucide="github" class="h-4 w-4"></i></a>
+            <a href="#" aria-label="LinkedIn" class="social-btn"><i data-lucide="linkedin" class="h-4 w-4"></i></a>
+            <a href="#" aria-label="YouTube" class="social-btn"><i data-lucide="youtube" class="h-4 w-4"></i></a>
+          </div>
+        </div>
+
+        <!-- Quick nav -->
+        <nav>
+          <h4 class="text-sm font-semibold uppercase tracking-wider text-white">Platform</h4>
+          <ul class="mt-4 space-y-2.5 text-sm text-slate-400">
+            <li><a class="footer-link" href="#features">Features</a></li>
+            <li><a class="footer-link" href="#calculator">Savings Calculator</a></li>
+            <li><a class="footer-link" href="#pricing">Pricing</a></li>
+            <li><a class="footer-link" href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+
+        <nav>
+          <h4 class="text-sm font-semibold uppercase tracking-wider text-white">Company</h4>
+          <ul class="mt-4 space-y-2.5 text-sm text-slate-400">
+            <li><a class="footer-link" href="#">About Us</a></li>
+            <li><a class="footer-link" href="#">Careers</a></li>
+            <li><a class="footer-link" href="#">Privacy Policy</a></li>
+            <li><a class="footer-link" href="#">Terms of Service</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 sm:flex-row">
+        <p class="text-sm text-slate-500">© <span id="current-year">2026</span> VoltMind AI. All rights reserved.</p>
+        <p class="flex items-center gap-1.5 text-sm text-slate-500">
+          <span class="h-1.5 w-1.5 rounded-full bg-neon-400 animate-pulse-slow"></span>
+          All systems operational
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- App script -->
+  <script src="js/app.js"></script>
+</body>
+</html>

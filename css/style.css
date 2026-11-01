@@ -1,0 +1,414 @@
+/* ============================================================
+   VoltMind AI — Custom Stylesheet
+   Extends Tailwind (CDN) with glassmorphism, glows, sliders,
+   and reusable component classes.
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   1. GLASSMORPHISM — base shell used by nav, cards, panels
+   ------------------------------------------------------------ */
+.nav-shell {
+  background: rgba(11, 18, 32, 0.55);               /* translucent dark base */
+  backdrop-filter: blur(16px) saturate(160%);        /* frosted glass */
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.08);      /* subtle hairline */
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Scrolled state: slightly more opaque + tighter shadow */
+.nav-shell.is-scrolled {
+  background: rgba(7, 12, 22, 0.82);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.55);
+}
+
+.glass-card {
+  position: relative;
+  background: rgba(11, 18, 32, 0.5);
+  backdrop-filter: blur(14px) saturate(150%);
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+}
+
+/* ------------------------------------------------------------
+   2. HERO BACKGROUND — circuit grid + neon orbs
+   ------------------------------------------------------------ */
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(34, 211, 238, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34, 211, 238, 0.05) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, black 40%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, black 40%, transparent 100%);
+}
+
+.glow-orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(100px);
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.glow-orb--cyan {
+  width: 480px;
+  height: 480px;
+  top: -120px;
+  left: -100px;
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.55), transparent 70%);
+}
+
+.glow-orb--green {
+  width: 420px;
+  height: 420px;
+  top: 40px;
+  right: -120px;
+  background: radial-gradient(circle, rgba(34, 197, 94, 0.45), transparent 70%);
+}
+
+/* ------------------------------------------------------------
+   3. NAVIGATION LINKS
+   ------------------------------------------------------------ */
+.nav-link {
+  display: inline-flex;
+  padding: 0.5rem 0.9rem;
+  border-radius: 0.75rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: rgb(203 213 225); /* slate-300 */
+  transition: color 0.2s ease, background 0.2s ease;
+}
+.nav-link:hover,
+.nav-link.is-active {
+  color: rgb(34 211 238); /* electric-400 */
+  background: rgba(34, 211, 238, 0.08);
+}
+
+.mobile-nav-link {
+  display: block;
+  padding: 0.7rem 0.9rem;
+  border-radius: 0.75rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: rgb(203 213 225);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.mobile-nav-link:hover {
+  background: rgba(34, 211, 238, 0.1);
+  color: rgb(34 211 238);
+}
+
+/* ------------------------------------------------------------
+   4. BUTTONS
+   ------------------------------------------------------------ */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.4rem;
+  border-radius: 0.9rem;
+  font-size: 0.925rem;
+  font-weight: 600;
+  color: rgb(4 8 16);                             /* near-black text on gradient */
+  background: linear-gradient(135deg, #06b6d4, #22c55e);
+  box-shadow: 0 0 24px rgba(34, 211, 238, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+  box-shadow: 0 0 40px rgba(34, 197, 94, 0.45);
+}
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.4rem;
+  border-radius: 0.9rem;
+  font-size: 0.925rem;
+  font-weight: 600;
+  color: rgb(226 232 240);                        /* slate-200 */
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.04);
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+.btn-ghost:hover {
+  background: rgba(34, 211, 238, 0.08);
+  border-color: rgba(34, 211, 238, 0.45);
+  transform: translateY(-2px);
+}
+
+/* ------------------------------------------------------------
+   5. TEXT GRADIENT UTILITY
+   ------------------------------------------------------------ */
+.text-gradient-cyan-green {
+  background: linear-gradient(90deg, #22d3ee, #4ade80);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ------------------------------------------------------------
+   6. FEATURE CARDS
+   ------------------------------------------------------------ */
+.feature-card {
+  position: relative;
+  padding: 1.75rem;
+  border-radius: 1.25rem;
+  background: rgba(11, 18, 32, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(10px);
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  overflow: hidden;
+}
+.feature-card::before {
+  /* top-edge gradient line revealed on hover */
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(34, 211, 238, 0.7), transparent);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.feature-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(34, 211, 238, 0.3);
+  box-shadow: 0 18px 50px rgba(6, 182, 212, 0.12);
+}
+.feature-card:hover::before {
+  opacity: 1;
+}
+
+/* Icon chips with variant colors */
+.feature-icon {
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.9rem;
+  transition: transform 0.25s ease;
+}
+.feature-card:hover .feature-icon {
+  transform: scale(1.08);
+}
+.feature-icon--cyan   { background: rgba(34, 211, 238, 0.12); color: #22d3ee; }
+.feature-icon--green  { background: rgba(34, 197, 94, 0.12);  color: #4ade80; }
+.feature-icon--purple { background: rgba(168, 85, 247, 0.12); color: #c084fc; }
+.feature-icon--amber  { background: rgba(251, 191, 36, 0.12); color: #fbbf24; }
+
+/* ------------------------------------------------------------
+   7. RANGE SLIDERS (calculator)
+   ------------------------------------------------------------ */
+.range-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.08);
+  outline: none;
+  cursor: pointer;
+}
+.range-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, #06b6d4, #22c55e);
+  border: 2px solid #040810;
+  box-shadow: 0 0 14px rgba(34, 211, 238, 0.6);
+  transition: transform 0.15s ease;
+}
+.range-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+.range-slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, #06b6d4, #22c55e);
+  border: 2px solid #040810;
+  box-shadow: 0 0 14px rgba(34, 211, 238, 0.6);
+  cursor: pointer;
+}
+
+/* Toggle checkbox rows */
+.toggle-row {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.6rem 0.85rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  font-size: 0.875rem;
+  color: rgb(203 213 225);
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease;
+  user-select: none;
+}
+.toggle-row:has(input:checked) {
+  border-color: rgba(34, 211, 238, 0.4);
+  background: rgba(34, 211, 238, 0.06);
+}
+.toggle-row input[type='checkbox'] {
+  accent-color: #22d3ee;
+  width: 1rem;
+  height: 1rem;
+  cursor: pointer;
+}
+
+/* ------------------------------------------------------------
+   8. PRICING CARDS
+   ------------------------------------------------------------ */
+.pricing-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 1.75rem;
+  border-radius: 1.25rem;
+  background: rgba(11, 18, 32, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.pricing-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
+.pricing-card--featured {
+  border-color: rgba(34, 211, 238, 0.45);
+  background: linear-gradient(180deg, rgba(6, 182, 212, 0.08), rgba(11, 18, 32, 0.6));
+  box-shadow: 0 0 44px rgba(34, 211, 238, 0.18);
+}
+.pricing-card--featured:hover {
+  border-color: rgba(34, 197, 94, 0.55);
+  box-shadow: 0 0 56px rgba(34, 197, 94, 0.22);
+}
+
+/* ------------------------------------------------------------
+   9. FORM CONTROLS
+   ------------------------------------------------------------ */
+.form-label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: rgb(203 213 225);
+}
+.form-input {
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(4, 8, 16, 0.55);
+  color: rgb(226 232 240);
+  font-size: 0.9rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.form-input::placeholder {
+  color: rgb(100 116 139);
+}
+.form-input:focus {
+  outline: none;
+  border-color: rgba(34, 211, 238, 0.55);
+  box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.15);
+}
+.form-input.is-invalid {
+  border-color: rgba(248, 113, 113, 0.6);
+}
+
+.form-select {
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(4, 8, 16, 0.85);
+  color: rgb(226 232 240);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+.form-select:focus {
+  outline: none;
+  border-color: rgba(34, 211, 238, 0.55);
+}
+.form-select option {
+  background: #0b1220;
+  color: #e2e8f0;
+}
+
+/* ------------------------------------------------------------
+   10. FOOTER
+   ------------------------------------------------------------ */
+.footer-link {
+  transition: color 0.2s ease;
+}
+.footer-link:hover {
+  color: rgb(34 211 238);
+}
+
+.social-btn {
+  display: grid;
+  place-items: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  color: rgb(148 163 184);
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+}
+.social-btn:hover {
+  color: rgb(34 211 238);
+  border-color: rgba(34, 211, 238, 0.4);
+  background: rgba(34, 211, 238, 0.08);
+  transform: translateY(-2px);
+}
+
+/* ------------------------------------------------------------
+   11. SCROLL REVEAL (JS adds .is-visible)
+   ------------------------------------------------------------ */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ------------------------------------------------------------
+   12. RESPONSIVE REFINEMENTS
+   ------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Smaller screens: tighten hero padding a touch */
+@media (max-width: 480px) {
+  .nav-shell {
+    border-radius: 1rem;
+  }
+  .btn-primary,
+  .btn-ghost {
+    padding: 0.65rem 1.1rem;
+    font-size: 0.875rem;
+  }
+}
